@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Love Me Valentine</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+   body {
+    margin: 0;
+    height: 100vh;
+    background: linear-gradient(135deg, #af1c34, #c14a7c);
+    font-family: 'Poppins', sans-serif;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  h1 {
+    color: white;
+    margin-top: 25px;
+    font-size: 2.2rem;
+    text-align: center;
+  }
+
+  .question-container {
+    position: relative;
+    margin-top: 8vh;
+    text-align: center;
+    width: 90%;
+    max-width: 420px;
+  }
+
+  .question {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+    color: white;
+  }
+
+  .button-container {
+    display: flex;
+    justify-content: center;
+    gap: 1.2rem;
+    position: relative;
+  }
+
+  .btn {
+    border: none;
+    border-radius: 50px;
+    padding: 12px 26px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background-color: #ff1f48;
+    color: white;
+    box-shadow: 0px 4px 15px rgba(255, 77, 109, 0.5);
+  }
+
+  .btn:hover {
+    transform: scale(1.1);
+  }
+
+  .result {
+    display: none;
+    text-align: center;
+    margin-top: 25px;
+    animation: fadeIn 1s ease forwards;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.8); }
+    to { opacity: 1; transform: scale(1); }
+  }
+
+  video {
+    width: 70%;
+    max-width: 240px;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+  }
+
+  .result p {
+    font-size: 1.4rem;
+    color: white;
+    margin-top: 12px;
+    padding: 0 10px;
+  }
+</style>
+</head>
+
+<body>
+
+<h1>Love Me Valentine 💘</h1>
+
+<div class="question-container" id="questionBox">
+  <div class="question">Will you be my Valentine?</div>
+
+  <div class="button-container">
+    <button class="btn" id="yesBtn">Yes 💖</button>
+    <button class="btn" id="noBtn">No 🙈</button>
+  </div>
+
+  <div class="result" id="result">
+
+    <!-- 🎥 YOUR TEDDY VIDEO -->
+    <!-- 🔴 CHANGE teddy.mp4 IF YOUR FILE NAME IS DIFFERENT -->
+    <video id="teddyVideo" src="teddy.mp4"></video>
+
+    <!-- 💌 PERSONAL MESSAGE -->
+    <!-- 🔴 CHANGE THE NAMES BELOW -->
+    <p id="loveMessage">Vera, I knew you’d say yes ❤️ – Siddhant</p>
+
+  </div>
+</div>
+
+<script>
+ const noBtn = document.getElementById("noBtn");
+  const yesBtn = document.getElementById("yesBtn");
+  const result = document.getElementById("result");
+  const teddyVideo = document.getElementById("teddyVideo");
+  const questionBox = document.getElementById("questionBox");
+
+  function moveNoButton() {
+    const container = document.querySelector(".question-container");
+    const rect = container.getBoundingClientRect();
+
+    const btnWidth = noBtn.offsetWidth;
+    const btnHeight = noBtn.offsetHeight;
+
+    const maxX = rect.width - btnWidth;
+    const maxY = rect.height - btnHeight;
+
+    const x = Math.random() * maxX;
+    const y = Math.random() * maxY;
+
+    noBtn.style.position = "absolute";
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
+  }
+
+  noBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    moveNoButton();
+  });
+
+  noBtn.addEventListener("touchstart", (e) => {
+    e.preventDefault();
+    moveNoButton();
+  });
+
+  yesBtn.addEventListener("click", () => {
+    result.style.display = "block";
+    questionBox.querySelector(".question").style.display = "none";
+    noBtn.style.display = "none";
+    yesBtn.style.display = "none";
+    teddyVideo.play();
+  });
+</script>
+
+</body>
+</html>
